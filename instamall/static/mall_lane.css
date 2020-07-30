@@ -1,0 +1,36 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.wrapper{
+    height: 800px;
+    width: 700px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: auto;
+}
+
+.roy{
+    display: inline-block;
+    padding-top: 120px;
+    padding-left: 130px;
+}
+
+.raymond{
+    display: inline-block;
+    padding-top: 120px;
+    padding-left: 220px;
+}
+
+.ryan{
+    display: inline-block;
+    padding-top: 150px;
+    padding-left: 135px;
+}
+
+.chris{
+    display: inline-block;
+    padding-top: 150px;
+    padding-left: 450px;
+}

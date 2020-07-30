@@ -1,0 +1,45 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.background{
+    padding-top: 80px;
+    background-color: rgb(19,59,71);
+}
+.wrapper{
+    height: 800px;
+    width: 700px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: auto;
+}
+
+a{
+    color: white;
+}
+
+.clint{
+    display: inline-block;
+    
+}
+
+.beth{
+    display: inline-block;
+}
+
+.ben{
+    display: inline-block;
+}
+
+.wilson{
+    display: inline-block;
+}
+
+.mogi{
+    display: inline-block;
+}
+
+.josh{
+    display: inline-block;
+}

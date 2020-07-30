@@ -4,9 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{mall_name}}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'show_mall.css' %}">
 </head>
 <body>
-    this will be a mall page
-    <a href="/mall/2/2">choose store</a>
+    <div class="background">
+    <div class="wrapper" style= "background-image: url('{% static "virtual_mall_inside.jpg" %}');">
+        <div class="clint"><a href="/mall/2/2">Clint's Bath Salts</a></div>
+        <br>
+        <div class="beth"><a href="/mall/2/3">Beth's Imporium</a></div>
+        <br>
+        <div class="ben"><a href="/mall/2/4">Ben'Jamin Records</a></div>
+        <br>
+        <div class="wilson"><a href="/mall/2/5">Wilson's Top Suits</a></div>
+        <br>
+        <div class="mogi"><a href="/mall/2/6">Mogi's Shoes</a></div>
+        <br>
+        <div class="josh"><a href="/mall/2/7">Josh and Adrian's Bakery</a></div>
+    </div>
+</div>
 </body>
 </html>

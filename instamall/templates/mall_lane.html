@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mall Lane</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'mall_lane.css' %}">
 </head>
 <body>
-    This will be homepage
-    <a href="/mall/2">roys plaza</a>
+    <div class="wrapper" style= "background-image: url('{% static "virtual_mall_lane.jpg" %}');">
+        <div class="roy"><a href="/mall/2">Roy's Plaza</a></div>
+        <div class="raymond"><a href="/mall/2">Raymond's Market</a></div>
+        <div class="ryan"><a href="/mall/2">Ryan's Mall</a></div>
+        <div class="chris"><a href="/mall/2">Chris' Factorium</a></div>
+    </div>
 </body>
 </html>
