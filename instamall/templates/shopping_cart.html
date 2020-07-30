@@ -11,7 +11,7 @@
     {% if cart %}
     {% for store in stores_visited %}
     <table>
-        <caption>{{ store.name }}</caption>
+        <caption><a href="/mall/4/{{ store.id }}">{{ store.name }}</a></caption>
         <tr>
             <th>Product</th>
             <th>Amount</th>

@@ -14,7 +14,11 @@ def show_mall(request, mall_id):
     if 'cart' not in request.session:
         return redirect('/')
 
-    return render(request, 'show_mall.html')
+    context = {
+        "this_mall" : Mall.objects.get(id=mall_id)
+    }
+
+    return render(request, 'show_mall.html',context)
 
 def show_store(request, mall_id, store_id):
     if 'cart' not in request.session:
@@ -88,7 +92,7 @@ def shopping_cart(request):
         'all_products' : Product.objects.all(),
     }
     print(request.session['cart'])
-    
+
     return render(request, 'shopping_cart.html',context)
 
 def remove_product(request, product_id):

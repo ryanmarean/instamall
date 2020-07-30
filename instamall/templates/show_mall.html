@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{mall_name}}</title>
+    <title>{{ this_mall.name }}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'show_mall.css' %}">
 </head>
@@ -11,24 +11,24 @@
     <div class="background">
         <div class="header">
             <a href="/">Return to Mall Lane</a>
-            <h1>Roy's Plaza</h1>
+            <h1>{{ this_mall.name }}</h1>
             <div class="cart_info">
                 <a href="/shopping_cart">Shopping Cart</a>
                 <h3>{{ request.session.product_amount }} Items</h3>
             </div>
         </div>
     <div class="wrapper" style= "background-image: url('{% static "virtual_mall_inside.jpg" %}');">
-        <div class="clint"><a href="/mall/4/1">Clint's Bath Salts</a></div>
+        <div class="clint"><a href="/mall/{{ this_mall.id }}/1">Clint's Bath Salts</a></div>
         <br>
-        <div class="beth"><a href="/mall/4/2">Beth's Imporium</a></div>
+        <div class="beth"><a href="/mall/{{ this_mall.id }}/2">Beth's Imporium</a></div>
         <br>
-        <div class="ben"><a href="/mall/4/3">Ben'Jamin Records</a></div>
+        <div class="ben"><a href="/mall/{{ this_mall.id }}/3">Ben'Jamin Records</a></div>
         <br>
-        <div class="wilson"><a href="/mall/4/4">Wilson's Top Suits</a></div>
+        <div class="wilson"><a href="/mall/{{ this_mall.id }}/4">Wilson's Top Suits</a></div>
         <br>
-        <div class="mogi"><a href="/mall/4/5">Mogi's Shoes</a></div>
+        <div class="mogi"><a href="/mall/{{ this_mall.id }}/5">Mogi's Shoes</a></div>
         <br>
-        <div class="josh"><a href="/mall/4/6">Josh and Adrian's Bakery</a></div>
+        <div class="josh"><a href="/mall/{{ this_mall.id }}/6">Josh and Adrian's Bakery</a></div>
     </div>
 </div>
 </body>

@@ -28,7 +28,8 @@
         <h3>{{ product.name }}</h3>
         <p>{{ product.desc }}</p>
         <h4>${{ product.price|floatformat:2 }}</h4>
-        <input type="hidden" name="quantity" value="1">
+        <label for="quantity"></label>
+        <input type="number" name="quantity" value="1">
         <button type="submit">Add to Cart</button>
         </form>
         {% endfor %}
