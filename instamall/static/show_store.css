@@ -1,0 +1,72 @@
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.header{
+    padding-top: 20px;
+    width: 700px;
+    margin: auto;
+}
+
+.return{
+    background-color: rgb(56,202,218);
+}
+.cart{
+    margin-left: 370px;
+    background-color: rgb(56,202,218);
+}
+
+.header h3{
+    margin-left: 550px;
+}
+
+.header a{
+    width: fit-content;
+    border: 2px solid black;
+    color: black;
+    text-decoration: none;
+    font-weight: bolder;
+}
+
+.wrapper{
+    height: 800px;
+    width: 700px;
+    margin: auto;
+    margin-top: 10px;
+    border: 1px solid transparent;
+    /* background-image: url('/static/Store_example_Clint_Salts.png'); */
+    background-repeat: no-repeat;
+}
+
+.products{
+    display: flex;
+    flex-direction: column;
+    margin-left: 306px;
+    margin-top: 150px;
+}
+.products p{
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 5px;
+}
+
+.products h4{
+    width: fit-content;
+    margin: auto;
+}
+
+.products h3{
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 5px;
+    background-image: linear-gradient(to right, salmon, white);
+}
+
+.products button{
+    margin-left: 255px;
+    margin-bottom: 30px;
+    background-image: linear-gradient(to right, rgb(52,201,217), white);
+    font-weight: bolder;
+}

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ this_store.name }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'show_store.css' %}">
 </head>
 <body>
     {% if messages %}
@@ -13,19 +15,24 @@
     {% endfor %}
     </ul>
     {% endif %}
-
-    <p>this will be a store page</p>
-    <a href="/shopping_cart">shopping cart</a><br>
-    <h3>{{ this_store.name }}</h3>
-    {% for product in products %}
-    <form action="/mall/{{ mall_id }}/{{ store_id }}/add_to_cart/{{ product.id }}" method="POST">
-    {% csrf_token %}
-    <p>{{ product.name }}</p>
-    <p>{{ product.desc }}</p>
-    <p>{{ product.price|floatformat:2 }}</p>
-    <input type="hidden" name="quantity" value="1">
-    <button type="submit">Add to Cart</button>
-    </form>
-    {% endfor %}
+    <div class="header">
+        <a href="/mall/{{mall_id}}" class='return'> RETURN TO MALL</a>
+        <a href="/shopping_cart" class='cart'> SHOPPING CART</a><br>
+        <h3>6 ITEMS</h3>
+    </div>
+    <div class="wrapper" style="background-image: url('/static/Store_example_{{bg_source}}');">
+        <div class="products">
+        {% for product in products %}
+        <form action="/mall/{{ mall_id }}/{{ store_id }}/add_to_cart/{{ product.id }}" method="POST">
+        {% csrf_token %}
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.desc }}</p>
+        <h4>${{ product.price|floatformat:2 }}</h4>
+        <input type="hidden" name="quantity" value="1">
+        <button type="submit">Add to Cart</button>
+        </form>
+        {% endfor %}
+    </div>
+</div>
 </body>
 </html>
