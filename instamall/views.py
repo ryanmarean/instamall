@@ -24,9 +24,11 @@ def show_store(request, mall_id, store_id):
 
 def add_to_cart(request, mall_id, store_id, product_id):
     if product_id in request.session['cart']:
-        request.session['cart'][product_id] += request.POST['quantity']
-    if product_id not in request.session['cart']:
-        request.session['cart'][product_id] = request.POST['quantity']
+        currQ = request.session['cart'][product_id]
+        currQ += int(request.POST['quantity'])
+        request.session['cart'][product_id] = currQ
+    else:
+        request.session['cart'][product_id] = int(request.POST['quantity'])
     messages.success(request, "Item added to cart!")
     print(request.session['cart'])
     return redirect ('/mall/' + str(mall_id) + '/' + str(store_id))
