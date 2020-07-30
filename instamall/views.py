@@ -37,12 +37,14 @@ def show_store(request, mall_id, store_id):
     return render(request, 'show_store.html',context)
 
 def add_to_cart(request, mall_id, store_id, product_id):
-    if product_id in request.session['cart']:
-        currQ = request.session['cart'][product_id]
+    if str(product_id) in request.session['cart']:
+        currQ = request.session['cart'][str(product_id)]
         currQ += int(request.POST['quantity'])
-        request.session['cart'][product_id] = currQ
+        request.session['cart'][str(product_id)] = currQ
+        request.session.save()
     else:
-        request.session['cart'][product_id] = int(request.POST['quantity'])
+        request.session['cart'][str(product_id)] = int(request.POST['quantity'])
+        request.session.save()
     messages.success(request, "Item added to cart!")
     print(request.session['cart'])
     return redirect ('/mall/' + str(mall_id) + '/' + str(store_id))
