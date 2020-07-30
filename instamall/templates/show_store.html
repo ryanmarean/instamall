@@ -18,7 +18,7 @@
     <div class="header">
         <a href="/mall/{{mall_id}}" class='return'> RETURN TO MALL</a>
         <a href="/shopping_cart" class='cart'> SHOPPING CART</a><br>
-        <h3>6 ITEMS</h3>
+        <h3>{{ request.session.product_amount }} Items</h3>
     </div>
     <div class="wrapper" style="background-image: url('/static/Store_example_{{bg_source}}');">
         <div class="products">

@@ -6,7 +6,8 @@ from .models import *
 def index(request):
     if 'cart' not in request.session:
         request.session['cart'] = {}
-    # request.session['uid'] = 1
+        request.session['product_amount'] = 0
+
     return render(request, 'mall_lane.html')
     
 def show_mall(request, mall_id):
@@ -41,17 +42,34 @@ def add_to_cart(request, mall_id, store_id, product_id):
         currQ = request.session['cart'][str(product_id)]
         currQ += int(request.POST['quantity'])
         request.session['cart'][str(product_id)] = currQ
+        request.session['product_amount'] += int(request.POST['quantity'])
         request.session.save()
     else:
         request.session['cart'][str(product_id)] = int(request.POST['quantity'])
+        request.session['product_amount'] += int(request.POST['quantity'])
         request.session.save()
     messages.success(request, "Item added to cart!")
     print(request.session['cart'])
     return redirect ('/mall/' + str(mall_id) + '/' + str(store_id))
 
 def shopping_cart(request):
+
+    stores_visited = []
+    for product_id in request.session['cart']:
+        this_product = Product.objects.get(id=product_id)
+        if this_product.store not in stores_visited:
+            stores_visited.append(this_product.store)
+    print(stores_visited)
+    products_added = []
+    for product_id in request.session['cart']:
+        this_product = Product.objects.get(id=product_id)
+        products_added.append(this_product)
+    print(products_added)
     context = {
+        'stores_visited' : stores_visited,
+        'products_added' : products_added,
         'cart' : request.session['cart'],
+        'all_products' : Product.objects.all(),
     }
     print(request.session['cart'])
     return render(request, 'shopping_cart.html',context)

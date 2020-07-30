@@ -14,7 +14,7 @@
             <h1>Roy's Plaza</h1>
             <div class="cart_info">
                 <a href="">Shopping Cart</a>
-                <h3>6 ITEMS</h3>
+                <h3>{{ request.session.product_amount }} Items</h3>
             </div>
         </div>
     <div class="wrapper" style= "background-image: url('{% static "virtual_mall_inside.jpg" %}');">

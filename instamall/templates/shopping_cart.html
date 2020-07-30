@@ -8,10 +8,16 @@
 <body>
     this will be the shopping cart page
     <a href="/purchase_complete">pay here</a>
-    {% if request.session.cart %}
+    {% if cart %}
     <ul>
-    {% for product in request.session.cart %}
-    <li>{{ product.name }} {{ product.price }}</li>
+    {% for store in stores_visited %}
+    <li>{{ store.name }}</li>
+    {% for product in products_added %}
+    {% if product.store.id == store.id %}
+    <li> {{ product.name }} {% for key,value in cart.items %}
+    {% if key == product.id|slugify %}{{ value }}{% endif %}{% endfor %} ${{ product.price|floatformat:2 }}
+    {% endif %}
+    {% endfor %}
     {% endfor %}
     <ul>
     {% endif %}
