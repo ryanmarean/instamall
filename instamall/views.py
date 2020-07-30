@@ -11,9 +11,15 @@ def index(request):
     return render(request, 'mall_lane.html')
     
 def show_mall(request, mall_id):
+    if 'cart' not in request.session:
+        return redirect('/')
+
     return render(request, 'show_mall.html')
 
 def show_store(request, mall_id, store_id):
+    if 'cart' not in request.session:
+        return redirect('/')
+
     this_store = Store.objects.get(id=store_id)
     if store_id == 1:
         bg_source = "Clint_Salts.png"
@@ -48,11 +54,14 @@ def add_to_cart(request, mall_id, store_id, product_id):
         request.session['cart'][str(product_id)] = int(request.POST['quantity'])
         request.session['product_amount'] += int(request.POST['quantity'])
         request.session.save()
+
     messages.success(request, "Item added to cart!")
     print(request.session['cart'])
     return redirect ('/mall/' + str(mall_id) + '/' + str(store_id))
 
 def shopping_cart(request):
+    if 'cart' not in request.session:
+        return redirect('/')
 
     stores_visited = []
     for product_id in request.session['cart']:
@@ -65,31 +74,67 @@ def shopping_cart(request):
         this_product = Product.objects.get(id=product_id)
         products_added.append(this_product)
     print(products_added)
+    total_amount = 0
+    for product in request.session['cart']:
+        charging_product = Product.objects.get(id=product)
+        total_amount += charging_product.price * request.session['cart'][str(charging_product.id)]
+    print(total_amount)
+
     context = {
         'stores_visited' : stores_visited,
         'products_added' : products_added,
+        'total_amount' : total_amount,
         'cart' : request.session['cart'],
         'all_products' : Product.objects.all(),
     }
     print(request.session['cart'])
+    
     return render(request, 'shopping_cart.html',context)
 
-def checkout(request):
-    for product_id, quantity in request.session['cart'].items():
-        product = Product.objects.get(id=product_id)
-        price = product.price
-        request.session['order'] += {
-            "product_id" : [product],
-            "price_each" : price,
-            "amount_purchased" : quantity,
-            "total_price" : quantity * price
-        }
-        request.session['cart'].flush()
-        print(request.session['order'])
-    return redirect('/purchase_complete')
+def remove_product(request, product_id):
+    request.session['product_amount'] -= request.session['cart'][str(product_id)]
+    request.session['cart'].pop(str(product_id))
+    return redirect('/shopping_cart')
+
+def add_product(request,product_id):
+    request.session['cart'][str(product_id)] += 1
+    request.session['product_amount'] += 1
+    return redirect('/shopping_cart')
+
+def decrease_product(request, product_id):
+    if request.session['cart'][str(product_id)] == 1:
+        return redirect('/remove_product/' + str(product_id))
+    request.session['cart'][str(product_id)] -= 1
+    request.session['product_amount'] -= 1
+    return redirect('/shopping_cart')
+
 
 def purchase_complete(request):
+    stores_visited = [] # list of Store objects
+    for product_id in request.session['cart']:
+        this_product = Product.objects.get(id=product_id)
+        if this_product.store not in stores_visited:
+            stores_visited.append(this_product.store)
+    print(stores_visited)
+    products_added = [] # list of Product objects
+    for product_id in request.session['cart']:
+        this_product = Product.objects.get(id=product_id)
+        products_added.append(this_product)
+    print(products_added)
+    total_amount = 0
+    for product in request.session['cart']:
+        charging_product = Product.objects.get(id=product)
+        total_amount += charging_product.price * request.session['cart'][str(charging_product.id)]
+    print(total_amount)
     context = {
-        "all_products" : Products.objects.all()
+        'stores_visited' : stores_visited,
+        'products_added' : products_added,
+        'total_amount' : total_amount,
+        'cart' : request.session['cart'],
+        'all_products' : Product.objects.all(),
     }
+    request.session.flush()
+    request.session['cart'] = {}
+    request.session['product_amount'] = 0
+    print(request.session['cart'])
     return render(request, 'purchase_complete.html', context)

@@ -9,17 +9,35 @@
     this will be the shopping cart page
     <a href="/purchase_complete">pay here</a>
     {% if cart %}
-    <ul>
     {% for store in stores_visited %}
-    <li>{{ store.name }}</li>
-    {% for product in products_added %}
-    {% if product.store.id == store.id %}
-    <li> {{ product.name }} {% for key,value in cart.items %}
-    {% if key == product.id|slugify %}{{ value }}{% endif %}{% endfor %} ${{ product.price|floatformat:2 }}
-    {% endif %}
+    <table>
+        <caption>{{ store.name }}</caption>
+        <tr>
+            <th>Product</th>
+            <th>Amount</th>
+            <th>Price</th>
+        </tr>
+        {% for product in products_added %}
+        {% if product.store.id == store.id %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>
+                {% for key,value in cart.items %}
+                {% if key == product.id|slugify %}
+                {{ value }}
+                <a href="/remove_product/{{product.id}}">remove</a>
+                <a href="/add_product/{{product.id}}">+</a>
+                <a href="/decrease_product/{{product.id}}">-</a>
+                {% endif %}
+                {% endfor %}
+            </td>
+            <td>${{ product.price|floatformat:2 }}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
     {% endfor %}
-    {% endfor %}
-    <ul>
     {% endif %}
+    <h3>Total purchase: ${{total_amount|floatformat:2}}</h3>
 </body>
 </html>

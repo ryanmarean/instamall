@@ -6,6 +6,19 @@
     <title>Purchase Complete</title>
 </head>
 <body>
-    this will be the purchase complete page
+    <div class="wrapper">
+        <div class="item_list">
+            <h2>Items:</h2>
+            {% for item in products_added %}
+                <p> {% for key,value in cart.items %}
+                        {% if key == item.id|slugify %}
+                            {{value}}
+                        {% endif %}
+                    {% endfor %}
+                    {{item.name}}</p>
+            {% endfor %}
+        </div>
+        <h2>Total Amount ${{ total_amount|floatformat:2 }}</h2>
+    </div>
 </body>
 </html>
