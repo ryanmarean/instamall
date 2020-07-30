@@ -14,11 +14,25 @@ def show_mall(request, mall_id):
 
 def show_store(request, mall_id, store_id):
     this_store = Store.objects.get(id=store_id)
+    if store_id == 1:
+        bg_source = "Clint_Salts.png"
+    if store_id == 2:
+        bg_source = "Beth.jpg"
+    if store_id == 3:
+        bg_source = "benjamin.png"
+    if store_id == 4:
+        bg_source = "Wilson_suits.png"
+    if store_id == 5:
+        bg_source = "mogi_shoes.png"
+    if store_id == 6:
+        bg_source = "Josh_Adrian_Bakery.png"
+
     context = {
         "this_store" : this_store,
         "products" : this_store.products.all(),
         "mall_id" : mall_id,
         "store_id" : store_id,
+        "bg_source": bg_source,
     }
     return render(request, 'show_store.html',context)
 
