@@ -7,8 +7,31 @@
     padding-top: 80px;
     background-color: rgb(19,59,71);
 }
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    width: 700px;
+    margin: auto;
+}
+
+.header a{
+    font-size: 22px;
+    text-decoration: none;
+    color: bisque;
+}
+
+.header h1{
+    color: greenyellow;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.header h3{
+    color: greenyellow;
+}
+
 .wrapper{
-    height: 800px;
+    height: 760px;
     width: 700px;
     background-repeat: no-repeat;
     background-size: contain;
@@ -21,25 +44,36 @@ a{
 
 .clint{
     display: inline-block;
-    
+    margin-top: 60px;
+    margin-left: 330px;
 }
 
 .beth{
     display: inline-block;
+    margin-top: 45px;
+    margin-left: 520px;
 }
 
 .ben{
     display: inline-block;
+    margin-top: 150px;
+    margin-left: 20px;
 }
 
 .wilson{
     display: inline-block;
+    margin-top: 180px;
+    margin-left: 65px;
 }
 
 .mogi{
     display: inline-block;
+    margin-top: 10px;
+    margin-left: 555px;
 }
 
 .josh{
     display: inline-block;
+    margin-top: 135px;
+    margin-left: 240px;
 }

@@ -11,11 +11,11 @@ def show_mall(request, mall_id):
     return render(request, 'show_mall.html')
 
 def show_store(request, mall_id, store_id):
-    this_store = Store.objects.get(id=store_id)
-    context = {
-        "products" : this_store.products,
-    }
-    return render(request, 'show_store.html',context)
+    # this_store = Store.objects.get(id=store_id)
+    # context = {
+    #     "products" : this_store.products,
+    # }
+    return render(request, 'show_store.html')#,context)
 
 def add_to_cart(request, mall_id, store_id, product_id):
     if product_id in request.session['cart']:
