@@ -3,15 +3,12 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
     path('', views.index),
-    # this is supposed 
-    path('RoysMall', views.roy_mall, name='Roys Mall'),
-    # <a href="{% url 'Roys Mall' %}">Roys Mall</a>, this belongs in templates
-    path('roy_store', views.roy_store),
-    path(''),
-    path(''),
-    path(''),
-
-    
+    path('mall/<int:mall_id>', views.show_mall),
+    path('mall/<int:mall_id>/<int:store_id>', views.show_store),
+    path('mall/<int:mall_id>/<int:store_id>/add_to_cart/<int:product_id>',views.add_to_cart),
+    path('shopping_cart', views.shopping_cart),
+    path('checkout',views.checkout),
+    path('purchase_complete', views.purchase_complete),
 ]
+
