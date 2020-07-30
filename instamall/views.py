@@ -4,6 +4,8 @@ from django.contrib import messages
 from .models import *
 
 def index(request):
+    if 'cart' not in request.session:
+        request.session['cart'] = {}
     # request.session['uid'] = 1
     return render(request, 'mall_lane.html')
     
@@ -13,22 +15,27 @@ def show_mall(request, mall_id):
 def show_store(request, mall_id, store_id):
     this_store = Store.objects.get(id=store_id)
     context = {
-        "products" : this_store.products,
+        "this_store" : this_store,
+        "products" : this_store.products.all(),
+        "mall_id" : mall_id,
+        "store_id" : store_id,
     }
     return render(request, 'show_store.html',context)
 
 def add_to_cart(request, mall_id, store_id, product_id):
     if product_id in request.session['cart']:
         request.session['cart'][product_id] += request.POST['quantity']
-    else:
+    if product_id not in request.session['cart']:
         request.session['cart'][product_id] = request.POST['quantity']
     messages.success(request, "Item added to cart!")
-    return redirect ('/mall/' + str(mall_id) + str(store_id))
+    print(request.session['cart'])
+    return redirect ('/mall/' + str(mall_id) + '/' + str(store_id))
 
 def shopping_cart(request):
     context = {
         'cart' : request.session['cart'],
     }
+    print(request.session['cart'])
     return render(request, 'shopping_cart.html',context)
 
 def checkout(request):

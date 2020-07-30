@@ -3,10 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{store_name}}</title>
+    <title>{{ this_store.name }}</title>
 </head>
 <body>
-    this will be a store page
-    <a href="/shopping_cart">shopping cart</a>
+    {% if messages %}
+    <ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+    <p>this will be a store page</p>
+    <a href="/shopping_cart">shopping cart</a><br>
+    <h3>{{ this_store.name }}</h3>
+    {% for product in products %}
+    <form action="/mall/{{ mall_id }}/{{ store_id }}/add_to_cart/{{ product.id }}" method="POST">
+    {% csrf_token %}
+    <p>{{ product.name }}</p>
+    <p>{{ product.desc }}</p>
+    <p>{{ product.price|floatformat:2 }}</p>
+    <input type="hidden" name="quantity" value="1">
+    <button type="submit">Add to Cart</button>
+    </form>
+    {% endfor %}
 </body>
 </html>

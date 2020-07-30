@@ -8,5 +8,12 @@
 <body>
     this will be the shopping cart page
     <a href="/purchase_complete">pay here</a>
+    {% if request.session.cart %}
+    <ul>
+    {% for product, quantity in request.session.cart %}
+    <li>{{ product }} {{ quantity }}</li>
+    {% endfor %}
+    <ul>
+    {% endif %}
 </body>
 </html>
