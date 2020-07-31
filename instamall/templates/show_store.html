@@ -9,13 +9,6 @@
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
 </head>
 <body>
-    {% if messages %}
-    <ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-    {% endif %}
     <div class="header">
         <a href="/mall/{{mall_id}}" class='return'> RETURN TO MALL</a>
         <a href="/shopping_cart" class='cart'> SHOPPING CART</a><br>
@@ -23,18 +16,25 @@
     </div>
     <div class="wrapper" style="background-image: url('/static/Store_example_{{bg_source}}');">
         <div class="products">
-        {% for product in products %}
-        <form action="/mall/{{ mall_id }}/{{ store_id }}/add_to_cart/{{ product.id }}" method="POST">
-        {% csrf_token %}
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.desc }}</p>
-        <h4>${{ product.price|floatformat:2 }}</h4>
-        <label for="quantity"></label>
-        <input type="number" name="quantity" value="1" min="1">
-        <button type="submit">Add to Cart</button>
-        </form>
+            {% for product in products %}
+            <form action="/mall/{{ mall_id }}/{{ store_id }}/add_to_cart/{{ product.id }}" method="POST">
+                {% csrf_token %}
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.desc }}</p>
+                <h4>${{ product.price|floatformat:2 }}</h4>
+                <label for="quantity"></label>
+                <input class="numdrop" type="number" name="quantity" value="1" min="1" style="margin-left: 170px; width: 50px;">
+                <button type="submit">Add to Cart</button>
+            </form>
+            {% endfor %}
+        </div>
+        {% if messages %}
+        <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
         {% endfor %}
+        </ul>
+        {% endif %}
     </div>
-</div>
 </body>
 </html>

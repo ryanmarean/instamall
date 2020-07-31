@@ -6,40 +6,50 @@
     <title>Shopping Cart</title>
     {% load static %}
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'shopping_cart.css' %}">
 </head>
 <body>
-    this will be the shopping cart page
-    <a href="/purchase_complete">pay here</a>
-    {% if cart %}
-    {% for store in stores_visited %}
-    <table>
-        <caption><a href="/mall/4/{{ store.id }}">{{ store.name }}</a></caption>
-        <tr>
-            <th>Product</th>
-            <th>Amount</th>
-            <th>Price</th>
-        </tr>
-        {% for product in products_added %}
-        {% if product.store.id == store.id %}
-        <tr>
-            <td>{{ product.name }}</td>
-            <td>
-                {% for key,value in cart.items %}
-                {% if key == product.id|slugify %}
-                {{ value }}
-                <a href="/remove_product/{{product.id}}">remove</a>
-                <a href="/add_product/{{product.id}}">+</a>
-                <a href="/decrease_product/{{product.id}}">-</a>
-                {% endif %}
+    <div class="wrapper" style= "background-image: url('{% static "shopping_cart_clear.jpg" %}');">
+        <a href="/mall/4" class='return'> RETURN TO MALL</a>
+        <div class="shoplist">
+            <div class="store">
+                {% if cart %}
+                {% for store in stores_visited %}
+                <fieldset>
+                <table><legend><a href="/mall/4/{{ store.id }}">{{ store.name }}</a></legend>
+                    <tr>
+                        <th>Product</th>
+                        <th>Amount</th>
+                        <th>Price</th>
+                    </tr>
+                    {% for product in products_added %}
+                    {% if product.store.id == store.id %}
+                    <tr>
+                        <td>{{ product.name }}</td>
+                        <td>
+                            {% for key,value in cart.items %}
+                            {% if key == product.id|slugify %}
+                            {{ value }}
+                            <a href="/remove_product/{{product.id}}">remove</a>
+                            <a href="/add_product/{{product.id}}">+</a>
+                            <a href="/decrease_product/{{product.id}}">-</a>
+                            {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>${{ product.price|floatformat:2 }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </table>
+                </fieldset>
                 {% endfor %}
-            </td>
-            <td>${{ product.price|floatformat:2 }}</td>
-        </tr>
-        {% endif %}
-        {% endfor %}
-    </table>
-    {% endfor %}
-    {% endif %}
-    <h3>Total purchase: ${{total_amount|floatformat:2}}</h3>
+                {% endif %}
+            </div>
+        </div>
+        <div class="total_pay">
+            <h3>Total purchase: ${{total_amount|floatformat:2}}</h3>
+            <button><a href="/purchase_complete">pay here</a></button>
+        </div>
+    </div>
 </body>
 </html>

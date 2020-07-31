@@ -36,7 +36,6 @@
     margin: auto;
     margin-top: 10px;
     border: 1px solid transparent;
-    /* background-image: url('/static/Store_example_Clint_Salts.png'); */
     background-repeat: no-repeat;
 }
 
@@ -44,7 +43,7 @@
     display: flex;
     flex-direction: column;
     margin-left: 306px;
-    margin-top: 150px;
+    margin-top: 145px;
 }
 .products p{
     width: fit-content;
@@ -66,7 +65,12 @@
 
 .products button{
     margin-left: 255px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     background-image: linear-gradient(to right, rgb(52,201,217), white);
     font-weight: bolder;
+}
+
+
+li{
+    margin-left: 500px;
 }
